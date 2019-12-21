@@ -1,4 +1,6 @@
 <ul class="l-main-content main-content">
+
+    <!-- home -->
     <li class="l-section section section--is-active">
         <div class="intro">
             <div class="intro--banner">
@@ -29,38 +31,50 @@
             </div>
         </div>
     </li>
+
+    <!-- coders-works -->
     <li class="l-section section">
         <div class="work">
-            <h2>Selected work</h2>
+            <h2>Our Team</h2>
             <div class="work--lockup">
                 <ul class="slider">
-                    <li class="slider--item slider--item-left">
-                        <a href="#0">
-                            <div class="slider--item-image">
-                                <img src="{{asset('assets/img/work-victory.jpg')}}" alt="Victory">
-                            </div>
-                            <p class="slider--item-title">Victory</p>
-                            <p class="slider--item-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit sed do.</p>
-                        </a>
-                    </li>
-                    <li class="slider--item slider--item-center">
-                        <a href="#0">
-                            <div class="slider--item-image">
-                                <img src="{{asset('assets/img/work-metiew-smith.jpg')}}" alt="Metiew and Smith">
-                            </div>
-                            <p class="slider--item-title">Metiew &amp; Smith</p>
-                            <p class="slider--item-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit sed do.</p>
-                        </a>
-                    </li>
-                    <li class="slider--item slider--item-right">
-                        <a href="#0">
-                            <div class="slider--item-image">
-                                <img src="{{asset('assets/img/work-alex-nowak.jpg')}}" alt="Alex Nowak">
-                            </div>
-                            <p class="slider--item-title">Alex Nowak</p>
-                            <p class="slider--item-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit sed do.</p>
-                        </a>
-                    </li>
+                    @if (isset($coders) && is_object($coders))
+                    @foreach($coders as $c=>$coder)
+
+
+                            @if ($c!=0 && $c%2==0 && $c%3!=0)
+                                <li class="slider--item slider--item-center">
+                                <a href="#0">
+                                    <div class="slider--item-image">
+                                        <img src="{{asset('assets/img/work-metiew-smith.jpg')}}" alt="{!! $coder->name !!}">
+                                    </div>
+                                    <p class="slider--item-title">{!! $coder->name !!}</p>
+                                    <p class="slider--item-description">Bio: {!! $coder->bio !!}</p>
+                                </a>
+                                </li>
+                            @elseif ($c!=0 && $c%3!=0)
+                                <li class="slider--item slider--item-right">
+                                <a href="#0">
+                                    <div class="slider--item-image">
+                                         <img src="{{asset('assets/img/work-alex-nowak.jpg')}}" alt="{!! $coder->name !!}">
+                                    </div>
+                                    <p class="slider--item-title">{!! $coder->name !!}</p>
+                                    <p class="slider--item-description">Bio: {!! $coder->bio !!}</p>
+                                </a>
+                                </li>
+                            @else
+                                <li class="slider--item slider--item-left">
+                                    <a href="#0">
+                                        <div class="slider--item-image">
+                                            <img src="{{asset('assets/img/work-victory.jpg')}}" alt="{!! $coder->name !!}">
+                                        </div>
+                                        <p class="slider--item-title">{!! $coder->name !!}</p>
+                                        <p class="slider--item-description">Bio: {!! $coder->bio !!}</p>
+                                    </a>
+                                </li>
+                            @endif
+                        @endforeach
+                        @endif
                 </ul>
                 <div class="slider--prev">
                     <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -82,6 +96,8 @@
             </div>
         </div>
     </li>
+
+    <!--  portfolio -about -->
     <li class="l-section section">
         <div class="about">
             <div class="about--banner">
@@ -97,19 +113,15 @@
                 </a>
                 <img src="{{asset('assets/img/about-visual.png')}}" alt="About Us">
             </div>
-            <div class="about--options">
-                <a href="#0">
-                    <h3>Winners</h3>
-                </a>
-                <a href="#0">
-                    <h3>Philosophy</h3>
-                </a>
-                <a href="#0">
-                    <h3>History</h3>
-                </a>
+            <div class="#">
+                @foreach($portfolios as $portfolio )
+                    <a>{!! Html::image($portfolio->images) !!}{!! $portfolio->name !!}</a>
+                @endforeach
             </div>
         </div>
     </li>
+
+    <!-- contact -->
     <li class="l-section section">
         <div class="contact">
             <div class="contact--lockup">
@@ -128,6 +140,8 @@
             </div>
         </div>
     </li>
+
+    <!-- services-hire us  -->
     <li class="l-section section">
         <div class="hire">
             <h2>You want us to do</h2>

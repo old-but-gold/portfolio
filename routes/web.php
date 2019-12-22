@@ -11,8 +11,10 @@
 |
 */
 
-Route::group(['middleware'=>'web'], function(){
-    Route::match(['get','post'],'/',['uses'=>'IndexController@execute','as'=>'Home'] );
+Route::post('send_mail','MailSetting@send_form')->name('send_mail');
+
+Route::group([], function(){
+    Route::match(['get','post'],'/',['uses'=>'IndexController@execute','as'=>'home'] );
     Route::get('/page/{alias}',['uses'=>'PageController@execute','as'=>'page'] );
 
     Route::auth();
@@ -53,3 +55,6 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'], function(){
         Route::match(['get','post', 'delete'],'/edit/{service}',['uses'=>'ServiceEditController@execute','as'=>'serviceEdit']);
     });
 });
+
+
+//'middleware'=>'web'
